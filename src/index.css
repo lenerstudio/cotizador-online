@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@media print {
+    @page {
+        margin: 1cm;
+        size: auto;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background: white;
+    }
+
+    #root {
+        background: white;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Ensure the document is visible and scaled correctly */
+    #quote-document {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    /* Hide scroll containers */
+    .no-print-scroll {
+        overflow: visible !important;
+        max-height: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+}
+
+/* Fallback colors for PDF generation compatibility in HTML2PDF - GLOBAL SCOPE */
+/* These must be outside @media print because html2canvas reads the DOM directly */
+.pdf-bg-white {
+    background-color: #ffffff !important;
+}
+
+.pdf-bg-gray-50 {
+    background-color: #f9fafb !important;
+}
+
+.pdf-text-gray-900 {
+    color: #111827 !important;
+}
+
+.pdf-text-gray-800 {
+    color: #1f2937 !important;
+}
+
+.pdf-text-gray-700 {
+    color: #374151 !important;
+}
+
+.pdf-text-gray-600 {
+    color: #4b5563 !important;
+}
+
+.pdf-text-gray-500 {
+    color: #6b7280 !important;
+}
+
+.pdf-text-gray-400 {
+    color: #9ca3af !important;
+}
+
+.pdf-text-gray-300 {
+    color: #d1d5db !important;
+}
+
+.pdf-border-gray-100 {
+    border-color: #f3f4f6 !important;
+}
+
+.pdf-border-gray-200 {
+    border-color: #e5e7eb !important;
+}
+
+.pdf-border-gray-300 {
+    border-color: #d1d5db !important;
+}
