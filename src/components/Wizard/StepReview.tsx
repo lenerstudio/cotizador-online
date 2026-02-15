@@ -7,9 +7,10 @@ import html2pdf from 'html2pdf.js';
 
 interface StepReviewProps {
     data: QuoteData;
+    onReset: () => void;
 }
 
-const StepReview: React.FC<StepReviewProps> = ({ data }) => {
+const StepReview: React.FC<StepReviewProps> = ({ data, onReset }) => {
     const documentRef = useRef<HTMLDivElement>(null);
     /* Ref specifically for PDF generation, separate from preview */
     const pdfContainerRef = useRef<HTMLDivElement>(null);
@@ -17,6 +18,12 @@ const StepReview: React.FC<StepReviewProps> = ({ data }) => {
 
     const handlePrint = () => {
         window.print();
+    };
+
+    const handleReset = () => {
+        if (window.confirm("¿Estás seguro de que deseas iniciar una nueva cotización? Se perderán todos los datos actuales.")) {
+            onReset();
+        }
     };
 
     const handleDownloadPDF = async () => {
@@ -97,6 +104,13 @@ const StepReview: React.FC<StepReviewProps> = ({ data }) => {
             </div>
 
             <div className="flex justify-center space-x-4 pt-4 no-print flex-wrap gap-y-4">
+                <button
+                    onClick={handleReset}
+                    className="bg-red-50 border border-red-200 hover:bg-red-100 text-red-600 py-3 px-6 rounded-lg font-bold flex items-center transition-all shadow-sm hover:shadow-md transform hover:-translate-y-1"
+                >
+                    <CheckCircle size={20} className="mr-2" /> {/* Reusing CheckCircle or maybe a RefreshCcw/Trash icon would be better if imported */}
+                    Nueva Cotización
+                </button>
                 <button
                     onClick={handlePrint}
                     className="bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 py-3 px-6 rounded-lg font-bold flex items-center transition-all shadow-sm hover:shadow-md transform hover:-translate-y-1"

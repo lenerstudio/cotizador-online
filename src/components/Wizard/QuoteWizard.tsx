@@ -56,6 +56,11 @@ const QuoteWizard: React.FC = () => {
         setData(prev => ({ ...prev, ...updates }));
     };
 
+    const handleResetData = () => {
+        setData({ ...initialData, info: { ...initialData.info, date: new Date().toISOString().split('T')[0] } });
+        setStep(1);
+    };
+
     const nextStep = () => setStep(prev => Math.min(prev + 1, 6));
     const prevStep = () => setStep(prev => Math.max(prev - 1, 1));
 
@@ -66,7 +71,7 @@ const QuoteWizard: React.FC = () => {
             case 3: return <StepQuoteDetails data={data} updateData={updateData} errors={errors} />;
             case 4: return <StepItems data={data} updateData={updateData} errors={errors} />;
             case 5: return <StepTemplates data={data} updateData={updateData} />;
-            case 6: return <StepReview data={data} />;
+            case 6: return <StepReview data={data} onReset={handleResetData} />;
             default: return <StepBranding data={data} updateData={updateData} errors={errors} />;
         }
     };
