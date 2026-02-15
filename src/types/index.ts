@@ -44,6 +44,8 @@ export interface QuoteData {
     taxRate: number;
     notes: string;
     conditions: string;
+    // New field for template selection
+    template: string;
 }
 
 export interface ValidationErrors {

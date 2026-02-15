@@ -5,6 +5,7 @@ import { useQuoteValidation } from '../../hooks/useQuoteValidation';
 import StepBranding from './StepBranding';
 import StepClient from './StepClient';
 import StepQuoteDetails from './StepQuoteDetails';
+import StepTemplates from './StepTemplates';
 import StepItems from './StepItems';
 import StepReview from './StepReview';
 import { ChevronRight, ChevronLeft } from 'lucide-react';
@@ -43,6 +44,7 @@ const initialData: QuoteData = {
     taxRate: 0,
     notes: '',
     conditions: '',
+    template: 'modern',
 };
 
 const QuoteWizard: React.FC = () => {
@@ -54,7 +56,7 @@ const QuoteWizard: React.FC = () => {
         setData(prev => ({ ...prev, ...updates }));
     };
 
-    const nextStep = () => setStep(prev => Math.min(prev + 1, 5));
+    const nextStep = () => setStep(prev => Math.min(prev + 1, 6));
     const prevStep = () => setStep(prev => Math.max(prev - 1, 1));
 
     const renderStep = () => {
@@ -62,8 +64,9 @@ const QuoteWizard: React.FC = () => {
             case 1: return <StepBranding data={data} updateData={updateData} errors={errors} />;
             case 2: return <StepClient data={data} updateData={updateData} errors={errors} />;
             case 3: return <StepQuoteDetails data={data} updateData={updateData} errors={errors} />;
-            case 4: return <StepItems data={data} updateData={updateData} errors={errors} />;
-            case 5: return <StepReview data={data} />;
+            case 4: return <StepTemplates data={data} updateData={updateData} />;
+            case 5: return <StepItems data={data} updateData={updateData} errors={errors} />;
+            case 6: return <StepReview data={data} />;
             default: return <StepBranding data={data} updateData={updateData} errors={errors} />;
         }
     };
@@ -72,8 +75,9 @@ const QuoteWizard: React.FC = () => {
         { number: 1, title: 'Empresa' },
         { number: 2, title: 'Cliente' },
         { number: 3, title: 'Detalles' },
-        { number: 4, title: 'Ítems' },
-        { number: 5, title: 'Revisar' },
+        { number: 4, title: 'Plantillas' },
+        { number: 5, title: 'Ítems' },
+        { number: 6, title: 'Revisar' },
     ];
 
     return (
@@ -133,7 +137,7 @@ const QuoteWizard: React.FC = () => {
                         Anterior
                     </button>
 
-                    {step < 5 ? (
+                    {step < 6 ? (
                         <button
                             onClick={nextStep}
                             className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-bold text-sm flex items-center shadow-lg shadow-blue-200 transition-all hover:scale-105"
