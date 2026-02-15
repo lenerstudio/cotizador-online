@@ -1,6 +1,7 @@
 import React from 'react';
 import { QuoteData } from '../../types';
 import { CheckCircle } from 'lucide-react';
+import TemplatePreview from './TemplatePreview';
 
 interface StepTemplatesProps {
     data: QuoteData;
@@ -26,30 +27,24 @@ const StepTemplates: React.FC<StepTemplatesProps> = ({ data, updateData }) => {
                         key={template.id}
                         onClick={() => updateData({ template: template.id })}
                         className={`cursor-pointer group relative rounded-xl border-2 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg ${data.template === template.id
-                                ? `border-blue-500 shadow-blue-100 ring-2 ring-blue-200`
-                                : 'border-gray-200 hover:border-gray-300'
+                            ? `border-blue-500 shadow-blue-100 ring-2 ring-blue-200`
+                            : 'border-gray-200 hover:border-gray-300'
                             }`}
                     >
                         {/* Radio Button Indicator */}
                         <div className={`absolute top-3 right-3 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${data.template === template.id
-                                ? 'bg-blue-500 border-blue-500'
-                                : 'bg-white border-gray-300 group-hover:border-gray-400'
+                            ? 'bg-blue-500 border-blue-500'
+                            : 'bg-white border-gray-300 group-hover:border-gray-400'
                             }`}>
                             {data.template === template.id && <div className="w-2.5 h-2.5 bg-white rounded-full" />}
                         </div>
 
-                        {/* Preview Area (Abstract Representation) */}
-                        <div className={`h-40 ${template.color} rounded-t-lg mx-1 mt-1 flex flex-col p-3 relative overflow-hidden`}>
-                            {/* Abstract Header */}
-                            <div className={`h-4 w-1/3 mb-2 rounded opacity-50 ${template.borderColor.replace('border', 'bg')}`}></div>
-                            {/* Abstract Lines */}
-                            <div className="space-y-2">
-                                <div className="h-2 w-full bg-gray-400/20 rounded"></div>
-                                <div className="h-2 w-5/6 bg-gray-400/20 rounded"></div>
-                                <div className="h-2 w-4/6 bg-gray-400/20 rounded"></div>
-                            </div>
-                            {/* Abstract 'Total' Box */}
-                            <div className={`absolute bottom-3 right-3 h-6 w-16 rounded opacity-80 ${template.borderColor.replace('border', 'bg')}`}></div>
+                        {/* Preview Area (Realistic Thumbnail) */}
+                        <div className="h-48 bg-gray-100 rounded-t-lg mx-1 mt-1 relative overflow-hidden ring-1 ring-gray-200">
+                            <TemplatePreview template={template.id} />
+
+                            {/* Overlay to prevent interaction and add subtle gradient */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent pointer-events-none" />
                         </div>
 
                         {/* Card Body */}

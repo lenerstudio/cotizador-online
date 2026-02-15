@@ -64,8 +64,8 @@ const QuoteWizard: React.FC = () => {
             case 1: return <StepBranding data={data} updateData={updateData} errors={errors} />;
             case 2: return <StepClient data={data} updateData={updateData} errors={errors} />;
             case 3: return <StepQuoteDetails data={data} updateData={updateData} errors={errors} />;
-            case 4: return <StepTemplates data={data} updateData={updateData} />;
-            case 5: return <StepItems data={data} updateData={updateData} errors={errors} />;
+            case 4: return <StepItems data={data} updateData={updateData} errors={errors} />;
+            case 5: return <StepTemplates data={data} updateData={updateData} />;
             case 6: return <StepReview data={data} />;
             default: return <StepBranding data={data} updateData={updateData} errors={errors} />;
         }
@@ -75,8 +75,8 @@ const QuoteWizard: React.FC = () => {
         { number: 1, title: 'Empresa' },
         { number: 2, title: 'Cliente' },
         { number: 3, title: 'Detalles' },
-        { number: 4, title: 'Plantillas' },
-        { number: 5, title: 'Ítems' },
+        { number: 4, title: 'Ítems' },
+        { number: 5, title: 'Plantillas' },
         { number: 6, title: 'Revisar' },
     ];
 

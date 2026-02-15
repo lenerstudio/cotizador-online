@@ -41,6 +41,8 @@ const StepItems: React.FC<StepItemsProps> = ({ data, updateData, errors }) => {
     const taxAmount = subtotal * (data.taxRate / 100);
     const total = subtotal + taxAmount;
 
+    const isAddDisabled = data.items.length > 0 && data.items[data.items.length - 1].name.trim() === '';
+
     return (
         <div className="animate-fadeIn">
             {errors['items'] && (
@@ -54,7 +56,12 @@ const StepItems: React.FC<StepItemsProps> = ({ data, updateData, errors }) => {
                     <h3 className="font-bold text-gray-700">Productos y Servicios</h3>
                     <button
                         onClick={addItem}
-                        className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg flex items-center font-bold text-sm transition-colors shadow-sm"
+                        disabled={isAddDisabled}
+                        className={`py-2 px-4 rounded-lg flex items-center font-bold text-sm transition-colors shadow-sm ${isAddDisabled
+                                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                : 'bg-green-600 hover:bg-green-700 text-white'
+                            }`}
+                        title={isAddDisabled ? "Completa la descripción del ítem actual antes de añadir otro" : "Añadir nuevo ítem"}
                     >
                         <PlusCircle size={16} className="mr-2" />
                         Añadir Ítem
