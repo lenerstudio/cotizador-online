@@ -83,15 +83,15 @@ const StepReview: React.FC<StepReviewProps> = ({ data, onReset }) => {
             </div>
 
             {/* Document Preview Area - User sees this */}
-            <div className="bg-gray-100 p-4 rounded-lg overflow-auto border border-gray-200 shadow-inner max-h-[600px] no-print-scroll">
-                <div className="transform scale-90 origin-top shadow-2xl mx-auto bg-white">
+            <div className="bg-gray-100 p-4 rounded-lg overflow-auto border border-gray-200 shadow-inner max-h-[600px] no-print-scroll print:p-0 print:border-none print:overflow-visible">
+                <div className="transform scale-90 origin-top shadow-2xl mx-auto bg-white print:scale-100 print:transform-none print:shadow-none print:mx-0 print:origin-center">
                     <QuoteDocument data={data} ref={documentRef} />
                 </div>
             </div>
 
             {/* Hidden Container for PDF Generation - Library uses this */}
             {/* Using fixed positioning off-screen to ensure it's rendered by the browser but not visible */}
-            <div style={{
+            <div className="no-print" style={{
                 position: 'fixed',
                 left: '-1000vw',
                 top: 0,

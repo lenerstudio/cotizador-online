@@ -86,7 +86,7 @@ const QuoteDocument = forwardRef<HTMLDivElement, QuoteDocumentProps>(({ data }, 
     const s = getStyles();
 
     return (
-        <div ref={ref} className={`bg-white pdf-bg-white max-w-4xl mx-auto text-sm print:p-0 print:max-w-none ${s.container}`} id="quote-document">
+        <div ref={ref} className={`bg-white pdf-bg-white max-w-4xl mx-auto text-sm print:p-0 print:max-w-none quote-document ${s.container}`}>
             {/* 
                 Structure adjusted for Bold template to avoid negative margins.
                 For Bold template, we wrap header in a full-width colored div if possible, 
@@ -155,18 +155,31 @@ const QuoteDocument = forwardRef<HTMLDivElement, QuoteDocumentProps>(({ data }, 
                 )}
 
                 {/* Client Info & Meta Grid */}
-                <div className={`grid grid-cols-1 md:grid-cols-2 gap-12 mb-12 ${template === 'elegant' ? 'text-center' : ''}`}>
+                {/* Client Info & Meta Grid */}
+                <div className={`grid grid-cols-1 ${template === 'bold' ? 'md:grid-cols-2' : ''} gap-12 mb-12 ${template === 'elegant' ? 'text-center' : ''}`}>
                     <div>
                         <h3 className={s.sectionTitle} style={template === 'bold' ? { backgroundColor: data.color } : {}}>Facturar a</h3>
-                        <div className="text-lg font-bold mb-1">{data.client.name}</div>
-                        <div className="space-y-1 opacity-80">
-                            {data.client.taxId && <p>ID: {data.client.taxId}</p>}
-                            {data.client.address && <p>{data.client.address}</p>}
-                            {data.client.contactPerson && <p>Atn: {data.client.contactPerson}</p>}
-                            {data.client.email && <p>{data.client.email}</p>}
-                            {data.client.phone && <p>{data.client.phone}</p>}
+
+                        {/* Split Client Data into 2 Columns */}
+                        <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 ${template === 'elegant' ? 'text-left' : ''}`}>
+                            {/* Column 1: Name, ID, Address */}
+                            <div>
+                                <div className="text-lg font-bold mb-1">{data.client.name}</div>
+                                <div className="space-y-1 opacity-80">
+                                    {data.client.taxId && <p>ID: {data.client.taxId}</p>}
+                                    {data.client.address && <p>{data.client.address}</p>}
+                                </div>
+                            </div>
+
+                            {/* Column 2: Contact, Email, Phone */}
+                            <div className="space-y-1 opacity-80">
+                                {data.client.contactPerson && <p><span className="font-semibold">Atn:</span> {data.client.contactPerson}</p>}
+                                {data.client.email && <p>{data.client.email}</p>}
+                                {data.client.phone && <p>{data.client.phone}</p>}
+                            </div>
                         </div>
                     </div>
+
                     <div className={`${template === 'elegant' ? 'flex flex-col items-center' : 'text-right'}`}>
                         {/* For Elegant, we might want to show company info here if it was simpler in header */}
                         {template === 'bold' && (
